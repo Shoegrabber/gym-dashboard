@@ -1,0 +1,47 @@
+{
+  "lastUpdated": "2025-02-27T16:30:00Z",
+  "stats": {
+    "totalSessions": 65,
+    "legsSessions": 28,
+    "pushSessions": 22,
+    "pullSessions": 15
+  },
+  "exercises": [
+    {
+      "name": "Leg Press",
+      "current": 160,
+      "target": 180,
+      "unit": "kg"
+    },
+    {
+      "name": "Smith Squat",
+      "current": 60,
+      "target": 70,
+      "unit": "kg"
+    },
+    {
+      "name": "Cable Row",
+      "current": 54,
+      "target": 60,
+      "unit": "kg"
+    },
+    {
+      "name": "Lat Pulldown",
+      "current": 50,
+      "target": 55,
+      "unit": "kg"
+    },
+    {
+      "name": "Shoulder Press",
+      "current": 25,
+      "target": 30,
+      "unit": "kg"
+    },
+    {
+      "name": "Leg Curl",
+      "current": 59,
+      "target": 65,
+      "unit": "kg"
+    }
+  ]
+}

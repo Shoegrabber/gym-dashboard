@@ -1,0 +1,47 @@
+{
+  "lastUpdated": "2026-03-01T09:18:13.962878",
+  "stats": {
+    "totalSessions": 13,
+    "legsSessions": 3,
+    "pushSessions": 7,
+    "pullSessions": 2
+  },
+  "exercises": [
+    {
+      "name": "Smith machine Squat",
+      "current": 40,
+      "target": 44,
+      "unit": "kg"
+    },
+    {
+      "name": "Leg press",
+      "current": 150,
+      "target": 165,
+      "unit": "kg"
+    },
+    {
+      "name": "Lying leg curl",
+      "current": 54,
+      "target": 59,
+      "unit": "kg"
+    },
+    {
+      "name": "Seated calf raise",
+      "current": 55,
+      "target": 61,
+      "unit": "kg"
+    },
+    {
+      "name": "Face pull",
+      "current": 50,
+      "target": 55,
+      "unit": "kg"
+    },
+    {
+      "name": "Dumbbell bicep curl",
+      "current": 10,
+      "target": 11,
+      "unit": "kg"
+    }
+  ]
+}

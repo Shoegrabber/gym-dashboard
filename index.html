@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Progress Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #334155;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #60a5fa;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #60a5fa;
+        }
+        
+        .stat-card.legs { border-left-color: #10b981; }
+        .stat-card.push { border-left-color: #f59e0b; }
+        .stat-card.pull { border-left-color: #8b5cf6; }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #60a5fa;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .exercise {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+        }
+        
+        .exercise-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #334155;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+            border-radius: 5px;
+        }
+        
+        .exercise-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        
+        .plan-day {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+        
+        .plan-day.legs { border-left-color: #10b981; }
+        .plan-day.push { border-left-color: #f59e0b; }
+        .plan-day.pull { border-left-color: #8b5cf6; }
+        
+        .plan-day h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .exercise-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .exercise-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .exercise-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏋️ Gym Progress Dashboard</h1>
+            <p>Your Personal Health OS • Data-Driven Training</p>
+            <p id="last-updated">Last updated: Loading...</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-sessions">--</div>
+                <div class="stat-label">Total Sessions</div>
+            </div>
+            
+            <div class="stat-card legs">
+                <div class="stat-number" id="legs-sessions">--</div>
+                <div class="stat-label">Leg Days</div>
+            </div>
+            
+            <div class="stat-card push">
+                <div class="stat-number" id="push-sessions">--</div>
+                <div class="stat-label">Push Days</div>
+            </div>
+            
+            <div class="stat-card pull">
+                <div class="stat-number" id="pull-sessions">--</div>
+                <div class="stat-label">Pull Days</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📈 Strength Progress</h2>
+            <div id="exercise-progress">
+                <!-- Filled by JavaScript -->
+                <div class="exercise">
+                    <div class="exercise-name">Loading data...</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                    <div class="exercise-stats">
+                        <span>Current: --</span>
+                        <span>Target: --</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📅 Current Training Plan</h2>
+            
+            <div class="plan-day legs">
+                <h3>🦵 Day 1: Legs Emphasis</h3>
+                <ul class="exercise-list">
+                    <li><span>Smith Machine Squat</span> <span>3×8-12 @ 55-60kg</span></li>
+                    <li><span>Lying Leg Curl</span> <span>3×10-15 @ 50-55kg</span></li>
+                    <li><span>Leg Press</span> <span>3×10-15 @ 150-180kg</span></li>
+                    <li><span>Seated Calf Raise</span> <span>3×15-20 @ 80-120kg</span></li>
+                </ul>
+            </div>
+            
+            <div class="plan-day push">
+                <h3>💪 Day 2: Upper Push</h3>
+                <ul class="exercise-list">
+                    <li><span>Incline DB Press</span> <span>3×8-12 @ 17.5-20kg/DB</span></li>
+                    <li><span>Shoulder Press Machine</span> <span>3×10-15 @ 22.5-25kg</span></li>
+                    <li><span>Cable Chest Fly</span> <span>3×12-15 @ 9-12kg</span></li>
+                    <li><span>Tricep Pushdown</span> <span>3×12-15 @ 35-40kg</span></li>
+                </ul>
+            </div>
+            
+            <div class="plan-day pull">
+                <h3>🎣 Day 3: Upper Pull</h3>
+                <ul class="exercise-list">
+                    <li><span>Lat Pulldown</span> <span>3×8-12 @ 45-50kg</span></li>
+                    <li><span>Seated Cable Row</span> <span>3×10-15 @ 45-50kg</span></li>
+                    <li><span>Face Pull</span> <span>3×15-20 @ 40-45kg</span></li>
+                    <li><span>DB Bicep Curl</span> <span>3×10-15 @ 10-12kg/DB</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Personal Health OS v0.1 • Part of your Juju system</p>
+            <p>Dashboard updates automatically when you push new data to GitHub</p>
+            <p>View at: https://shoegrabber.github.io/gym-dashboard/</p>
+        </div>
+    </div>
+
+    <script>
+        // Load data from data/latest.json
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('data/latest.json');
+                const data = await response.json();
+                updateDashboard(data);
+            } catch (error) {
+                console.log('Using sample data');
+                useSampleData();
+            }
+        }
+        
+        function updateDashboard(data) {
+            // Update last updated
+            document.getElementById('last-updated').textContent = 
+                `Last updated: ${new Date(data.lastUpdated).toLocaleDateString()}`;
+            
+            // Update stats
+            document.getElementById('total-sessions').textContent = data.stats.totalSessions;
+            document.getElementById('legs-sessions').textContent = data.stats.legsSessions;
+            document.getElementById('push-sessions').textContent = data.stats.pushSessions;
+            document.getElementById('pull-sessions').textContent = data.stats.pullSessions;
+            
+            // Update exercises
+            const exerciseContainer = document.getElementById('exercise-progress');
+            exerciseContainer.innerHTML = '';
+            
+            data.exercises.forEach(exercise => {
+                const progress = (exercise.current / exercise.target) * 100;
+                const percentage = Math.min(Math.round(progress), 100);
+                
+                const exerciseEl = document.createElement('div');
+                exerciseEl.className = 'exercise';
+                exerciseEl.innerHTML = `
+                    <div class="exercise-name">${exercise.name}</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percentage}%"></div>
+                    </div>
+                    <div class="exercise-stats">
+                        <span>Current: ${exercise.current}${exercise.unit}</span>
+                        <span>Target: ${exercise.target}${exercise.unit}</span>
+                    </div>
+                `;
+                
+                exerciseContainer.appendChild(exerciseEl);
+            });
+        }
+        
+        function useSampleData() {
+            const sampleData = {
+                lastUpdated: new Date().toISOString(),
+                stats: {
+                    totalSessions: 65,
+                    legsSessions: 28,
+                    pushSessions: 22,
+                    pullSessions: 15
+                },
+                exercises: [
+                    { name: "Leg Press", current: 160, target: 180, unit: "kg" },
+                    { name: "Smith Squat", current: 60, target: 70, unit: "kg" },
+                    { name: "Cable Row", current: 54, target: 60, unit: "kg" },
+                    { name: "Lat Pulldown", current: 50, target: 55, unit: "kg" },
+                    { name: "Shoulder Press", current: 25, target: 30, unit: "kg" },
+                    { name: "Leg Curl", current: 59, target: 65, unit: "kg" }
+                ]
+            };
+            
+            updateDashboard(sampleData);
+            document.getElementById('last-updated').textContent += ' (Sample Data)';
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+        
+        // Auto-refresh every minute
+        setInterval(loadDashboardData, 60000);
+    </script>
+</body>
+</html>
