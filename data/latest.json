@@ -1,22 +1,22 @@
 {
-  "lastUpdated": "2026-03-01T09:18:13.962878",
+  "lastUpdated": "2026-03-04T22:47:14.808283",
   "stats": {
-    "totalSessions": 13,
-    "legsSessions": 3,
-    "pushSessions": 7,
-    "pullSessions": 2
+    "totalSessions": 84,
+    "legsSessions": 17,
+    "pushSessions": 18,
+    "pullSessions": 7
   },
   "exercises": [
     {
       "name": "Smith machine Squat",
-      "current": 40,
-      "target": 44,
+      "current": 60,
+      "target": 66,
       "unit": "kg"
     },
     {
       "name": "Leg press",
-      "current": 150,
-      "target": 165,
+      "current": 160,
+      "target": 176,
       "unit": "kg"
     },
     {
@@ -27,8 +27,26 @@
     },
     {
       "name": "Seated calf raise",
-      "current": 55,
-      "target": 61,
+      "current": 120,
+      "target": 132,
+      "unit": "kg"
+    },
+    {
+      "name": "Seated shoulder press machine",
+      "current": 25,
+      "target": 28,
+      "unit": "kg"
+    },
+    {
+      "name": "Lat pulldown",
+      "current": 50,
+      "target": 55,
+      "unit": "kg"
+    },
+    {
+      "name": "Seated cable row",
+      "current": 54,
+      "target": 59,
       "unit": "kg"
     },
     {
